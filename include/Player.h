@@ -1,17 +1,17 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <iostream>
 
 #include "Input.h"
-
-#define PI 3.14159265359
 
 struct playerHelper
 {
 	sf::CircleShape* _shape;
 	sf::RectangleShape* _line;
 	sf::Vector2f _origin;
+
+	sf::Vector2f _shapePos;
+	sf::Vector2f _linePos;
 
 	float _angle = 0.0f;
 };
@@ -34,15 +34,12 @@ private:
 	float _radius = 10.f;
 	float _rayLength = 25.f;
 	float _thickness = 2.f;
-	float _velocity = 0.82f;
+	float _speed = 0.6f;
 	float _rotVelocity = 0.4f;
 
 	void Rotate();
 
-	void Forward();
-	void Backward();
-	void Left();
-	void Right();
+	void ChangePosition();
 
 	void Move();
 };

@@ -37,7 +37,7 @@ void Game::Run()
         sf::Event event;
         while (_mainWindow->pollEvent(event))
         {
-            if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+            if (event.type == sf::Event::Closed || _input.pressedKey() == eESC)
                 _mainWindow->close();
         }
 

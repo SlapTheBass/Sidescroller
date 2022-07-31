@@ -12,13 +12,35 @@ Input::~Input()
 
 E_keys Input::pressedKey()
 {
-	if (_keyboard.isKeyPressed(sf::Keyboard::W) || _keyboard.isKeyPressed(sf::Keyboard::Up))
+	if (_keyboard.isKeyPressed(sf::Keyboard::W))
 	{
-		_keyHandler = eUP;
+		if (_keyboard.isKeyPressed(sf::Keyboard::A))
+		{
+			_keyHandler = eUP_LEFT;
+		}
+		else if (_keyboard.isKeyPressed(sf::Keyboard::D))
+		{
+			_keyHandler = eUP_RIGHT;
+		}
+		else
+		{
+			_keyHandler = eUP;
+		}
 	}
-	else if (_keyboard.isKeyPressed(sf::Keyboard::S) || _keyboard.isKeyPressed(sf::Keyboard::Down))
+	else if (_keyboard.isKeyPressed(sf::Keyboard::S))
 	{
-		_keyHandler = eDOWN;
+		if (_keyboard.isKeyPressed(sf::Keyboard::A))
+		{
+			_keyHandler = eDOWN_LEFT;
+		}
+		else if (_keyboard.isKeyPressed(sf::Keyboard::D))
+		{
+			_keyHandler = eDOWN_RIGHT;
+		}
+		else
+		{
+			_keyHandler = eDOWN;
+		}
 	}
 	else if (_keyboard.isKeyPressed(sf::Keyboard::A))
 	{

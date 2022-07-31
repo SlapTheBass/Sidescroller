@@ -42,6 +42,7 @@ private:
 	sf::View _camera;
 	Player* _player;
 	Level* _level;
+	Input _input;
 
 	void Update();
 	void Draw();

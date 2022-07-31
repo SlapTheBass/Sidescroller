@@ -42,64 +42,94 @@ void Player::Rotate()
 	_helper._line->setRotation(_helper._angle);
 }
 
-void Player::Forward()
+void Player::ChangePosition()
 {
-	_helper._shape->setPosition(_helper._shape->getPosition().x - (sin(_helper._angle * PI / 180) * _velocity),
-		                        _helper._shape->getPosition().y + (cos(_helper._angle * PI / 180) * _velocity));
-
-	_helper._line->setPosition(_helper._line->getPosition().x - (sin(_helper._angle * PI / 180) * _velocity),
-		                       _helper._line->getPosition().y + (cos(_helper._angle * PI / 180) * _velocity));
+	_helper._shape->setPosition(_helper._shapePos.x, _helper._shapePos.y);
+	_helper._line->setPosition(_helper._linePos.x, _helper._linePos.y);
 }
 
-void Player::Backward()
-{
-	_helper._shape->setPosition(_helper._shape->getPosition().x + (sin(_helper._angle * PI / 180) * _velocity),
-		                        _helper._shape->getPosition().y - (cos(_helper._angle * PI / 180) * _velocity));
-
-	_helper._line->setPosition(_helper._line->getPosition().x + (sin(_helper._angle * PI / 180) * _velocity),
-		                       _helper._line->getPosition().y - (cos(_helper._angle * PI / 180) * _velocity));
-}
-
-void Player::Left()
-{
-	_helper._shape->setPosition(_helper._shape->getPosition().x + (cos(_helper._angle * PI / 180) * _velocity),
-		                        _helper._shape->getPosition().y + (sin(_helper._angle * PI / 180) * _velocity));
-
-	_helper._line->setPosition(_helper._line->getPosition().x + (cos(_helper._angle * PI / 180) * _velocity),
-		                       _helper._line->getPosition().y + (sin(_helper._angle * PI / 180) * _velocity));
-}
-
-void Player::Right()
-{
-	_helper._shape->setPosition(_helper._shape->getPosition().x - (cos(_helper._angle * PI / 180) * _velocity),
-		                        _helper._shape->getPosition().y - (sin(_helper._angle * PI / 180) * _velocity));
-
-	_helper._line->setPosition(_helper._line->getPosition().x - (cos(_helper._angle * PI / 180) * _velocity),
-		                       _helper._line->getPosition().y - (sin(_helper._angle * PI / 180) * _velocity));
-}
 
 void Player::Move()
 {
+	_helper._shapePos = _helper._shape->getPosition();
+	_helper._linePos = _helper._line->getPosition();
+
 	switch (_input.pressedKey())
 	{
 	case eUP:
+		_helper._shapePos.y -= _speed;
+		_helper._linePos.y -= _speed;
+
 		Rotate();
-		Forward();
+		ChangePosition();
+		break;
+
+	case eUP_LEFT:
+		_helper._shapePos.y -= _speed/1.5;
+		_helper._linePos.y -= _speed/1.5;
+
+		_helper._shapePos.x -= _speed/1.5;
+		_helper._linePos.x -= _speed/1.5;
+
+		Rotate();
+		ChangePosition();
+		break;
+
+	case eUP_RIGHT:
+		_helper._shapePos.y -= _speed/1.5;
+		_helper._linePos.y -= _speed/1.5;
+
+		_helper._shapePos.x += _speed/1.5;
+		_helper._linePos.x += _speed/1.5;
+
+		Rotate();
+		ChangePosition();
 		break;
 
 	case eDOWN:
+		_helper._shapePos.y += _speed;
+		_helper._linePos.y += _speed;
+
 		Rotate();
-		Backward();
+		ChangePosition();
+		break;
+
+	case eDOWN_LEFT:
+		_helper._shapePos.y += _speed/1.5;
+		_helper._linePos.y += _speed/1.5;
+
+		_helper._shapePos.x -= _speed/1.5;
+		_helper._linePos.x -= _speed/1.5;
+
+		Rotate();
+		ChangePosition();
+		break;
+
+	case eDOWN_RIGHT:
+		_helper._shapePos.y += _speed/1.5;
+		_helper._linePos.y += _speed/1.5;
+
+		_helper._shapePos.x += _speed/1.5;
+		_helper._linePos.x += _speed/1.5;
+
+		Rotate();
+		ChangePosition();
 		break;
 
 	case eLEFT:
+		_helper._shapePos.x -= _speed;
+		_helper._linePos.x -= _speed;
+
 		Rotate();
-		Left();
+		ChangePosition();
 		break;
 
 	case eRIGHT:
+		_helper._shapePos.x += _speed;
+		_helper._linePos.x += _speed;
+
 		Rotate();
-		Right();
+		ChangePosition();
 		break;
 
 	default:
